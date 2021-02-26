@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import {
   ChakraProvider,
   theme,
 } from '@chakra-ui/react';
 
 import Login from './pages/Login';
-import Dashboard from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import NotFound from './pages/404';
 import AdminLayout from './components/Layouts/AdminLayout';
 
 const renderRoutes = () => (
@@ -26,9 +27,16 @@ function App() {
             <Login />
           </Route>
 
-          <Route path="admin/:path?">
+          <Route path="/admin/:path?">
             <AdminLayout>{renderRoutes()}</AdminLayout>
           </Route>
+
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
+
+          <Route component={NotFound} />
+
         </Switch>
       </ChakraProvider>
     </Router>
