@@ -11,7 +11,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-// import api from 'api';
+import api from '../../api';
 import { Link } from 'react-router-dom';
 import LoginError from './LoginError';
 
@@ -36,16 +36,17 @@ function LoginForm() {
   };
 
   const submitForm = (values) => {
-    // return api
-    //   .login(values.email, values.password)
-    //   .then(result => {
-    //     setIsSuccessfullySubmitted(result.status === 200);
-    //     setError('');
-    //     history.push('/dashboard');
-    //   })
-    //   .catch(() => {
-    //     setError('Submit error');
-    //   });
+    return api
+      .login(values.email, values.password)
+      .then(result => {
+        setIsSuccessfullySubmitted(result.status === 200);
+        sessionStorage.setItem('isAuthenticated', 1);
+        setError('');
+        history.push('/admin/dashboard');
+      })
+      .catch(() => {
+        setError('Submit error');
+      });
   };
 
   return (

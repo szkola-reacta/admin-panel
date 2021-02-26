@@ -5,6 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
+// Start the mocking conditionally.
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./api/mocks/browser');
+  worker.start();
+}
+
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />

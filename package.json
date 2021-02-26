@@ -9,7 +9,9 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.7.3",
+    "axios": "^0.21.1",
     "framer-motion": "^3.7.0",
+    "msw": "^0.27.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.4",
@@ -21,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "update": "npx msw init public --no-save",
     "test": "react-scripts test",
     "test:unit": "npm run test -- --watchAll=false",
     "test:ci": "cross-env CI=true npm run test:unit",
