@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ import api from '../../api';
 
 function Dashboard() {
   const history = useHistory();
-
   const handleMe = async () => {
     try {
       await api.me();
@@ -15,7 +14,11 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await api.logout();
+      await api.logout().then(result => {
+        if(result.status === 200){
+          sessionStorage.removeItem('isAuthenticated');
+        };
+      });
     } catch (error) {
     } finally {
       history.push('/login');
