@@ -11,13 +11,13 @@ import NotFound from './pages/404';
 import AdminLayout from './components/Layouts/AdminLayout';
 import SecureRoute from './components/SecureRoute';
 
-// const renderRoutes = () => (
-//   <Switch>
-//     <Route exact path="/dashboard">
-//       <Dashboard />
-//     </Route>
-//   </Switch>
-// );
+const renderRoutes = () => {
+  return <Switch>
+    <SecureRoute path="/admin/dashboard">
+      <Dashboard />
+    </SecureRoute>
+  </Switch>;
+};
 
 function App() {
   return (
@@ -28,11 +28,10 @@ function App() {
             <Login />
           </Route>
 
-          <SecureRoute exact path="/admin/dashboard">
-            <AdminLayout>
-              <Dashboard />
-            </AdminLayout>
-          </SecureRoute>
+          <Route path="/admin/:path?">
+            <AdminLayout>{renderRoutes()}</AdminLayout>
+          </Route>
+
 
           <Route exact path="/">
             <Redirect to="/login" />
